@@ -1,8 +1,7 @@
 #pragma once
 
-// L/R-paren for JP keycodes
-#define LSPO_KEYS KC_LSFT, KC_LSFT, KC_8
-#define RSPC_KEYS KC_RSFT, KC_RSFT, KC_9
+// Mod-Tap for SHIFT keys
+#define LSPO_KEYS KC_LSFT, KC_LSFT, KC_INT1// Tap -> Underscore
 
 // Solve SHIFT ignored in Windows Remote Desktop
 #define USB_POLLING_INTERVAL_MS 10
