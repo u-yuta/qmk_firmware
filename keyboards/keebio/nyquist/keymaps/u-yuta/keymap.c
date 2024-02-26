@@ -2,6 +2,16 @@
 #include "keymap_extras/keymap_japanese.h"
 #include "features/achordion.h"
 
+// home row mods
+#define HOME_A LGUI_T(KC_A)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D CTL_T(KC_D)
+#define HOME_F SFT_T(KC_F)
+#define HOME_J SFT_T(KC_J)
+#define HOME_K CTL_T(KC_K)
+#define HOME_L ALT_T(KC_L)
+#define HOME_SCLN GUI_T(KC_SCLN)
+
 enum combos {
   DF_COMBO,
   FJ_COMBO,
@@ -13,12 +23,12 @@ enum combos {
   COMMDOT_COMBO,
 };
 
-const uint16_t PROGMEM df_combo[] = {LCTL_T(KC_D), LSFT_T(KC_F), COMBO_END};
-const uint16_t PROGMEM fj_combo[] = {LSFT_T(KC_F), RSFT_T(KC_J), COMBO_END};
-const uint16_t PROGMEM hj_combo[] = {KC_H, RSFT_T(KC_J), COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {RSFT_T(KC_J), RCTL_T(KC_K), COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {RCTL_T(KC_K), RALT_T(KC_L), COMBO_END};
-const uint16_t PROGMEM lscln_combo[] = {RALT_T(KC_L), RGUI_T(KC_SCLN), COMBO_END};
+const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
+const uint16_t PROGMEM fj_combo[] = {HOME_F, HOME_J, COMBO_END};
+const uint16_t PROGMEM hj_combo[] = {KC_H, HOME_J, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
+const uint16_t PROGMEM lscln_combo[] = {HOME_L, HOME_SCLN, COMBO_END};
 const uint16_t PROGMEM mcomm_combo[] = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM commdot_combo[] = {KC_COMM, KC_DOT, COMBO_END};
 
@@ -40,14 +50,13 @@ enum layer_names {
     _NUM   // number, function
 };
 
-// S(KC_INT3) : JP_PIPE
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT_ortho_5x12(
-        KC_NO,      KC_1,        KC_2,        KC_3,        KC_4,        KC_5,            KC_6,    KC_7,        KC_8,        KC_9,        KC_0,           KC_DEL,
-        KC_TAB,     KC_Q,        KC_W,        KC_E,        KC_R,        KC_T,            KC_Y,    KC_U,        KC_I,        KC_O,        KC_P,           KC_MINS,
-        KC_ESC,     RGUI_T(KC_A),RALT_T(KC_S),LCTL_T(KC_D),LSFT_T(KC_F),KC_G,            KC_H,    RSFT_T(KC_J),RCTL_T(KC_K),RALT_T(KC_L),RGUI_T(KC_SCLN),KC_ENT,
-        KC_LSFT,    KC_Z,        KC_X,        KC_C,        KC_V,        KC_B,            KC_N,    KC_M,        KC_COMM,     KC_DOT,      KC_SLSH,        KC_RSFT,
-        KC_BSPC,    KC_NO,       KC_LGUI,     KC_LALT,     JP_MHEN,     LT(_NAV, KC_SPC),MO(_SYM),JP_HENK,     KC_RCTL,     KC_RALT,     KC_NO,          KC_ENT
+        KC_NO,      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,            KC_6,    KC_7,        KC_8,        KC_9,        KC_0,         KC_DEL,
+        KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,            KC_Y,    KC_U,        KC_I,        KC_O,        KC_P,         KC_MINS,
+        KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,            KC_H,    HOME_J,      HOME_K,      HOME_L,      HOME_SCLN,    KC_ENT,
+        KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,            KC_N,    KC_M,        KC_COMM,     KC_DOT,      KC_SLSH,      KC_RSFT,
+        KC_BSPC,    KC_NO,      KC_LGUI,    KC_LALT,    JP_MHEN,    LT(_NAV, KC_SPC),MO(_SYM),JP_HENK,     KC_RCTL,     KC_RALT,     KC_NO,        KC_ENT
     ),
 	[_SYM] = LAYOUT_ortho_5x12(
         KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,        KC_F8,        KC_F9,        KC_F10,         KC_F12,
@@ -91,11 +100,13 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-// This treats the tapping term as infinite, so it won't resort to alt unless hit another key.
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case RALT_T(KC_L):
-    case RGUI_T(KC_SCLN):
+    // treat as a tap when no other keys tapped
+    case HOME_A:
+    case HOME_S:
+    case HOME_L:
+    case HOME_SCLN:
       return -1;
     default:
       return TAPPING_TERM;
@@ -108,12 +119,23 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
+bool achordion_chord(uint16_t tap_hold_keycode,
+                    keyrecord_t* tap_hold_record,
+                    uint16_t other_keycode,
+                    keyrecord_t* other_record) {
+    // Allow same-hand holds when the other key is in the rows below the
+    // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+    if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
 
+    // Otherwise, follow the opposite hands rule.
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     if (!process_achordion(keycode, record)) { return false; }
 
     return true;
 }
+
 void matrix_scan_user(void) {
     achordion_task();
 }
