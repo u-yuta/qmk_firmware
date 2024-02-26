@@ -3,3 +3,5 @@ COMBO_ENABLE = yes
 ENCODER_MAP_ENABLE = no
 MOUSEKEY_ENABLE = yes
 TAP_DANCE_ENABLE = no
+
+SRC += features/achordion.c

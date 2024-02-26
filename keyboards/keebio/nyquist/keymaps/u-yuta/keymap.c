@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_extras/keymap_japanese.h"
+#include "features/achordion.h"
 
 enum combos {
   DF_COMBO,
@@ -94,3 +95,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (!process_achordion(keycode, record)) { return false; }
+
+    return true;
+}
+void matrix_scan_user(void) {
+    achordion_task();
+}
