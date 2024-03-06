@@ -64,18 +64,18 @@ const uint16_t PROGMEM ru_combo[] = {KC_R, KC_U, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {HOME_S, HOME_D, COMBO_END};
 const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
 const uint16_t PROGMEM fj_combo[] = {HOME_F, HOME_J, COMBO_END};
 const uint16_t PROGMEM gh_combo[] = {KC_G, KC_H, COMBO_END};
 const uint16_t PROGMEM hj_combo[] = {KC_H, HOME_J, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {HOME_L, HOME_SCLN, COMBO_END};
-const uint16_t PROGMEM mcommdot_combo[] = {KC_M, KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM commdot_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM mcommdot_combo[] = {BTM_M, BTM_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM lthumb2_combo[] = {SPC_NUM, KC_LCTL, COMBO_END};
+const uint16_t PROGMEM lthumb2_combo[] = {KC_SPC, KC_LCTL, COMBO_END};
 
 combo_t key_combos[] = {
     [RU_COMBO] = COMBO(ru_combo, CW_TOGG),
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
         KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      KC_B,       KC_N,       BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    JP_YEN,
-        KC_LCTL,    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // symbols
 	[_SYM] = LAYOUT_ortho_5x12(
