@@ -106,8 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // symbols
 	[_SYM] = LAYOUT_ortho_5x12(
         KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-        KC_TRNS,    JP_EXLM,    JP_QUOT,    JP_LBRC,    JP_RBRC,    JP_PERC,    KC_NO,      JP_AMPR,    JP_ASTR,    JP_EQL,     JP_TILD,    KC_TRNS,
-        KC_TRNS,    JP_UNDS,    JP_DQUO,    JP_LPRN,    JP_RPRN,    JP_AT,      KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    JP_COLN,    KC_TRNS,
+        KC_TRNS,    JP_EXLM,    JP_AT,      JP_LBRC,    JP_RBRC,    JP_PERC,    JP_AMPR,    JP_QUOT,    JP_ASTR,    JP_EQL,     JP_TILD,    KC_TRNS,
+        KC_TRNS,    JP_UNDS,    JP_DQUO,    JP_LPRN,    JP_RPRN,    JP_GRV,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    JP_COLN,    KC_TRNS,
         KC_TRNS,    JP_CIRC,    JP_DLR,     JP_LCBR,    JP_RCBR,    JP_HASH,    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_TRNS,    KC_TRNS,
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
 	),
