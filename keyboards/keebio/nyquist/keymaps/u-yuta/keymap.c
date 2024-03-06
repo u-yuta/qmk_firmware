@@ -14,11 +14,16 @@ enum layer_names {
 #define HOME_A LT(_SYM, KC_A)
 #define HOME_S KC_S
 #define HOME_D KC_D
-#define HOME_F SFT_T(KC_F)
-#define HOME_J SFT_T(KC_J)
+#define HOME_F KC_F
+#define HOME_J KC_J
 #define HOME_K KC_K
 #define HOME_L KC_L
 #define HOME_SCLN LT(_SYM, KC_SCLN)
+#define BTM_C CTL_T(KC_C)
+#define BTM_V SFT_T(KC_V)
+#define BTM_M SFT_T(KC_M)
+#define BTM_COMM CTL_T(KC_COMM)
+
 
 // Alias -- Mod-Tap
 #define SPC_NUM LT(_NUM, KC_SPC)
@@ -95,8 +100,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DEL,
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
-        KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    JP_YEN,
-        KC_LCTL,    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,    MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      KC_B,       KC_N,       BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    JP_YEN,
+        KC_LCTL,    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // symbols
 	[_SYM] = LAYOUT_ortho_5x12(
@@ -181,6 +186,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
         //     if (other_keycode == KC_W || other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
         //         break;
         case HOME_F:
+        case BTM_C:
+        case BTM_V:
             if (other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
                 break;
         case SPC_NUM:  // Allow all
