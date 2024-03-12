@@ -4,9 +4,10 @@
 
 enum layer_names {
     _DEFAULT,
-    _SYM,  // symbol
-    // _NAV,  // nav
+    _SYM,  // symbol, and nav
     _NUM,  // number, function
+    _FNC,  // function
+    _MOD,  // modifier
     _MOUSE
 };
 
@@ -14,11 +15,18 @@ enum layer_names {
 #define HOME_A LT(_SYM, KC_A)
 #define HOME_S KC_S
 #define HOME_D KC_D
-#define HOME_F SFT_T(KC_F)
-#define HOME_J SFT_T(KC_J)
+#define HOME_F KC_F
+#define HOME_J KC_J
 #define HOME_K KC_K
 #define HOME_L KC_L
 #define HOME_SCLN LT(_SYM, KC_SCLN)
+#define BTM_C CTL_T(KC_C)
+#define BTM_V SFT_T(KC_V)
+#define BTM_B LT(_FNC, KC_B)
+#define BTM_N LT(_NUM, KC_N)
+#define BTM_M SFT_T(KC_M)
+#define BTM_COMM CTL_T(KC_COMM)
+
 
 // Alias -- Mod-Tap
 #define SPC_NUM LT(_NUM, KC_SPC)
@@ -59,18 +67,18 @@ const uint16_t PROGMEM ru_combo[] = {KC_R, KC_U, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {HOME_S, HOME_D, COMBO_END};
 const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
 const uint16_t PROGMEM fj_combo[] = {HOME_F, HOME_J, COMBO_END};
 const uint16_t PROGMEM gh_combo[] = {KC_G, KC_H, COMBO_END};
 const uint16_t PROGMEM hj_combo[] = {KC_H, HOME_J, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {HOME_L, HOME_SCLN, COMBO_END};
-const uint16_t PROGMEM mcommdot_combo[] = {KC_M, KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM commdot_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM mcommdot_combo[] = {BTM_M, BTM_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM lthumb2_combo[] = {SPC_NUM, KC_LCTL, COMBO_END};
+const uint16_t PROGMEM lthumb2_combo[] = {KC_SPC, KC_LCTL, COMBO_END};
 
 combo_t key_combos[] = {
     [RU_COMBO] = COMBO(ru_combo, CW_TOGG),
@@ -95,22 +103,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DEL,
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
-        KC_LSFT,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    JP_YEN,
-        KC_LCTL,    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,    MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    JP_YEN,
+        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_SYM),   JP_HENK,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
-    // symbols
+    // symbol
 	[_SYM] = LAYOUT_ortho_5x12(
         KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-        KC_TRNS,    JP_EXLM,    JP_QUOT,    JP_LBRC,    JP_RBRC,    JP_PERC,    KC_NO,      JP_AMPR,    JP_ASTR,    JP_EQL,     JP_TILD,    KC_TRNS,
-        KC_TRNS,    JP_UNDS,    JP_DQUO,    JP_LPRN,    JP_RPRN,    JP_AT,      KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    JP_COLN,    KC_TRNS,
+        KC_TRNS,    JP_EXLM,    JP_AT,      JP_LBRC,    JP_RBRC,    JP_PERC,    JP_AMPR,    JP_QUOT,    JP_ASTR,    JP_EQL,     JP_TILD,    KC_TRNS,
+        KC_TRNS,    JP_UNDS,    JP_DQUO,    JP_LPRN,    JP_RPRN,    JP_GRV,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    JP_COLN,    KC_TRNS,
         KC_TRNS,    JP_CIRC,    JP_DLR,     JP_LCBR,    JP_RCBR,    JP_HASH,    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_TRNS,    KC_TRNS,
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
 	),
-    // number, function, mod
+    // number
 	[_NUM] = LAYOUT_ortho_5x12(
-        KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
-        KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-        KC_TRNS,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      JP_LPRN,    JP_RPRN,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    JP_SLSH,    KC_7,       KC_8,       KC_9,       JP_ASTR,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    JP_MINS,    KC_4,       KC_5,       KC_6,       JP_PLUS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_0,       KC_1,       KC_2,       KC_3,       JP_EQL,     KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+	),
+    // function
+	[_FNC] = LAYOUT_ortho_5x12(
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F10,     KC_F11,     KC_F12,     KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F7,      KC_F8,      KC_F9,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F4,      KC_F5,      KC_F6,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+	),
+    // mod
+	[_MOD] = LAYOUT_ortho_5x12(
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
         KC_TRNS,    OSM_LGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   KC_NO,      KC_NO,      OSM_RSFT,   OSM_RCTL,   OSM_RALT,   OSM_RGUI,   KC_TRNS,
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
 	),
@@ -181,6 +205,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
         //     if (other_keycode == KC_W || other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
         //         break;
         case HOME_F:
+        case BTM_C:
+        case BTM_V:
             if (other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
                 break;
         case SPC_NUM:  // Allow all
