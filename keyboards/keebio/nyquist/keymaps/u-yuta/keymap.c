@@ -4,10 +4,11 @@
 
 enum layer_names {
     _DEFAULT,
-    _SYM,  // symbol, and nav
-    _NUM,  // number, function
-    _FNC,  // function
-    _MOD,  // modifier
+    _SYM,
+    _NUM,
+    _FNC,
+    _NAV,
+    _MOD,
     _MOUSE
 };
 
@@ -31,6 +32,7 @@ enum layer_names {
 
 // Alias -- Mod-Tap
 #define SPC_NUM LT(_NUM, KC_SPC)
+#define NAV_BSPC LT(_NAV, KC_BSPC)
 #define MHEN_CTL CTL_T(KC_INT5)  // JP_MHEN
 
 // Alias -- One Shot Modifier
@@ -102,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
         KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    JP_YEN,
-        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_SYM),   KC_ENT,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     NAV_BSPC,   KC_ENT,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // symbol + nav
 	[_SYM] = LAYOUT_ortho_5x12(
@@ -126,6 +128,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F7,      KC_F8,      KC_F9,      KC_NO,      KC_TRNS,
         KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_F4,      KC_F5,      KC_F6,      KC_NO,      KC_TRNS,
         KC_TRNS,    OSM_LGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   KC_NO,      KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+	),
+    // navigation
+	[_NAV] = LAYOUT_ortho_5x12(
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_WH_L,    KC_MS_U,    KC_WH_R,    KC_WH_U,    KC_BTN2,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_NO,      KC_TRNS,
+        KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_WH_D,    KC_BTN1,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    KC_NO,      KC_TRNS,
+        KC_TRNS,    OSM_LGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   KC_NO,      KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_NO,      KC_TRNS,
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
 	),
     // mod
@@ -192,6 +202,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
+// Restrict oppisite hand holds by mod-tap
 bool achordion_chord(uint16_t tap_hold_keycode,
                     keyrecord_t* tap_hold_record,
                     uint16_t other_keycode,
@@ -207,7 +218,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
         case BTM_V:
             if (other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
                 break;
-        case SPC_NUM:  // Allow all
+        case NAV_BSPC:  // Allow all
+        case SPC_NUM:   // Allow all
         case MHEN_CTL:  // Allow all
             return true;
     }
