@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
         KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    JP_YEN,
-        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     NAV_BSPC,   KC_ENT,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LCTL,    TO(0),      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     MO(_NAV),   KC_ENT,     KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // symbol + nav
 	[_SYM] = LAYOUT_ortho_5x12(
