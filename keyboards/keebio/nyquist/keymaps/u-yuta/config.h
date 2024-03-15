@@ -9,3 +9,7 @@
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 #define COMBO_TERM 40
+
+// Delay between pressing a wheel key and wheel movement, by default 80
+#undef  MOUSEKEY_WHEEL_DELAY
+#define MOUSEKEY_WHEEL_DELAY 50
