@@ -62,7 +62,6 @@ enum combos {
     LSCLN_COMBO,
     COMMDOT_COMBO,
     DOTSLSH_COMBO,
-    LTHUMB2_COMBO
 };
 
 const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
@@ -78,71 +77,61 @@ const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {HOME_L, HOME_SCLN, COMBO_END};
 const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, BTM_SLSH, COMBO_END};
-const uint16_t PROGMEM lthumb2_combo[] = {MO(_NAV), KC_SPC, COMBO_END};
 
 combo_t key_combos[] = {
     [RT_COMBO] = COMBO(rt_combo, CW_TOGG),
     [SD_COMBO] = COMBO(sd_combo, KC_TAB),
-    [DF_COMBO] = COMBO(df_combo, KC_ESC),
+    [DF_COMBO] = COMBO(df_combo, MO(_NAV)),
     [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
     [XC_COMBO] = COMBO(xc_combo, KC_LALT),
     [FG_COMBO] = COMBO(fg_combo, JP_MHEN),
     [HJ_COMBO] = COMBO(hj_combo, JP_HENK),
-    [JK_COMBO] = COMBO(jk_combo, KC_BSPC),
+    [JK_COMBO] = COMBO(jk_combo, MO(_MOUSE)),
     [KL_COMBO] = COMBO(kl_combo, KC_DEL),
     [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
     [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
     [DOTSLSH_COMBO] = COMBO(dotslsh_combo, KC_RGUI),
-    [LTHUMB2_COMBO] = COMBO(lthumb2_combo, TO(_DEFAULT)),  // return to default layer
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT_ortho_5x12(
         TO(0),      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DEL,
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
-        KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_ENT,
-        KC_LSFT,    BTM_Z,      KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     BTM_SLSH,   JP_YEN,
-        KC_LCTL,    KC_NO,      KC_LGUI,    KC_LALT,    MO(_NAV),   KC_SPC,     KC_ENT,     MO(_NUM),   KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_BSPC,
+        KC_LSFT,    BTM_Z,      KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     BTM_SLSH,   KC_RSFT,
+        KC_LCTL,    XXXXXXX,    KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     KC_ENT,     MO(_NAV),   KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
-    // navigation
+    // navigation + number + function
 	[_NAV] = LAYOUT_ortho_5x12(
-        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
-        KC_TRNS,    C(KC_Q),    C(KC_W),    C(KC_E),    C(KC_R),    C(KC_T),    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_NO,      KC_NO,
-        KC_TRNS,    C(KC_A),    OSM_LALT,   OSM_LCTL,   OSM_LSFT,   C(KC_G),    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    KC_NO,      KC_TRNS,
-        KC_TRNS,    C(KC_Z),    C(KC_X),    C(KC_C),    C(KC_V),    C(KC_B),    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     KC_NO,      KC_NO,
-        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
-	),
-    // number + function
-	[_NUM] = LAYOUT_ortho_5x12(
-        KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
-        KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
-        KC_NO,      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_F12,
-        KC_NO,      OSM_LGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   KC_NO,      KC_NO,      OSM_RSFT,   OSM_RCTL,   OSM_RALT,   OSM_RGUI,   KC_TRNS,
-        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+        _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+        _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_WH_L,    KC_WH_D,    KC_WH_U,    KC_WH_R,    XXXXXXX,    KC_F12,
+        _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    XXXXXXX,    _______,
+        _______,    OSM_LGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   XXXXXXX,    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     XXXXXXX,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 	),
     // symbol 1
 	[_SYM] = LAYOUT_ortho_5x12(
-        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_TRNS,
-        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      JP_CIRC,    JP_AMPR,    JP_ASTR,    JP_YEN,     KC_NO,      KC_NO,
-        KC_TRNS,    KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      JP_QUOT,    JP_MINS,    JP_LPRN,    JP_RPRN,    JP_COLN,    KC_TRNS,
-        KC_TRNS,    OSM_RGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   KC_NO,      KC_NO,      JP_GRV,     JP_PIPE,    KC_NO,      KC_NO,      KC_NO,
-        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    JP_CIRC,    JP_AMPR,    JP_ASTR,    JP_PIPE,    XXXXXXX,    XXXXXXX,
+        _______,    _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    JP_QUOT,    JP_LPRN,    JP_RPRN,    JP_YEN,     JP_COLN,    _______,
+        _______,    OSM_RGUI,   OSM_LALT,   OSM_LCTL,   OSM_LSFT,   XXXXXXX,    XXXXXXX,    JP_GRV,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 	),
     // symbol 2
 	[_SYM2] = LAYOUT_ortho_5x12(
         KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-        KC_TRNS,    JP_EXLM,    JP_AT,      JP_HASH,    JP_DLR,     JP_PERC,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
-        KC_TRNS,    JP_UNDS,    JP_EQL,     JP_LBRC,    JP_RBRC,    JP_DQUO,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    KC_TRNS,    KC_TRNS,
-        KC_TRNS,    KC_TRNS,    JP_TILD,    JP_LCBR,    JP_RCBR,    KC_NO,      KC_TRNS,    OSM_RSFT,   OSM_RCTL,   OSM_RALT,   OSM_RGUI,   KC_NO,
-        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+        _______,    JP_EXLM,    JP_AT,      JP_HASH,    JP_DLR,     JP_PERC,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    JP_UNDS,    JP_EQL,     JP_LBRC,    JP_RBRC,    JP_DQUO,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    _______,    _______,
+        _______,    _______,    JP_TILD,    JP_LCBR,    JP_RCBR,    XXXXXXX,    _______,    OSM_RSFT,   OSM_RCTL,   OSM_RALT,   OSM_RGUI,   XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 	),
     // mouse
 	[_MOUSE] = LAYOUT_ortho_5x12(
-        KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
-        KC_TRNS,    KC_WH_L,    KC_MS_U,    KC_WH_R,    KC_WH_U,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
-        KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_WH_D,    KC_NO,      KC_NO,      KC_BTN1,    KC_BTN3,    KC_BTN2,    KC_NO,      KC_TRNS,
-        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
-        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+        XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    KC_WH_L,    KC_MS_U,    KC_WH_R,    KC_WH_U,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_WH_D,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
+        _______,    XXXXXXX,    KC_BTN1,    KC_BTN3,    KC_BTN2,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 	)
 };
 
