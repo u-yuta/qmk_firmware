@@ -13,22 +13,12 @@ enum layer_names {
 
 // Alias -- home row
 #define HOME_A LT(_SYM, KC_A)
-#define HOME_S KC_S
-#define HOME_D KC_D
-#define HOME_F KC_F
-#define HOME_J KC_J
-#define HOME_K KC_K
-#define HOME_L KC_L
 #define HOME_SCLN LT(_SYM2, KC_SCLN)
 // Alias -- bottom row
-#define BTM_Z KC_Z
 #define BTM_C CTL_T(KC_C)
 #define BTM_V SFT_T(KC_V)
-#define BTM_B KC_B
-#define BTM_N KC_N
 #define BTM_M SFT_T(KC_M)
 #define BTM_COMM CTL_T(KC_COMM)
-#define BTM_SLSH KC_SLSH
 
 
 // Alias -- Mod-Tap
@@ -65,28 +55,28 @@ enum combos {
 };
 
 const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM sd_combo[] = {HOME_S, HOME_D, COMBO_END};
-const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
-const uint16_t PROGMEM zx_combo[] = {BTM_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
-const uint16_t PROGMEM fg_combo[] = {HOME_F, KC_G, COMBO_END};
-const uint16_t PROGMEM hj_combo[] = {KC_H, HOME_J, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
-const uint16_t PROGMEM lscln_combo[] = {HOME_L, HOME_SCLN, COMBO_END};
+const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
+const uint16_t PROGMEM hj_combo[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
 const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, BTM_SLSH, COMBO_END};
+const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
 
 combo_t key_combos[] = {
     [RT_COMBO] = COMBO(rt_combo, CW_TOGG),
     [SD_COMBO] = COMBO(sd_combo, KC_TAB),
-    [DF_COMBO] = COMBO(df_combo, MO(_NAV)),
+    [DF_COMBO] = COMBO(df_combo, KC_ESC),
     [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
     [XC_COMBO] = COMBO(xc_combo, KC_LALT),
     [FG_COMBO] = COMBO(fg_combo, JP_MHEN),
     [HJ_COMBO] = COMBO(hj_combo, JP_HENK),
-    [JK_COMBO] = COMBO(jk_combo, MO(_MOUSE)),
+    [JK_COMBO] = COMBO(jk_combo, KC_BSPC),
     [KL_COMBO] = COMBO(kl_combo, KC_DEL),
     [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
     [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
@@ -97,8 +87,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT_ortho_5x12(
         TO(0),      KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DEL,
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
-        KC_ESC,     HOME_A,     HOME_S,     HOME_D,     HOME_F,     KC_G,       KC_H,       HOME_J,     HOME_K,     HOME_L,     HOME_SCLN,  KC_BSPC,
-        KC_LSFT,    BTM_Z,      KC_X,       BTM_C,      BTM_V,      BTM_B,      BTM_N,      BTM_M,      BTM_COMM,   KC_DOT,     BTM_SLSH,   KC_RSFT,
+        KC_ESC,     HOME_A,     KC_S,       KC_D,       KC_F,       KC_G,       KC_H,       KC_J,       KC_K,       KC_L,       HOME_SCLN,  KC_ENT,
+        KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      KC_B,       KC_N,       BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    KC_RSFT,
         KC_LCTL,    XXXXXXX,    KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     KC_ENT,     MO(_NAV),   KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // navigation + number + function
@@ -136,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _NAV, _NUM, _MOUSE);
+    return update_tri_layer_state(state, _NAV, _SYM2, _MOUSE);
 }
 
 // settings for CAPS_WORD
@@ -165,8 +155,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // treat as tap of Mod-Tap when no other keys are tapped while holding
         // (did not work)
         // case HOME_A:
-        // case HOME_S:
-        // case HOME_L:
         // case HOME_SCLN:
         //     return -1;
         default:
@@ -187,14 +175,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                     keyrecord_t* other_record) {
 
     switch (tap_hold_keycode) {
-        // case HOME_D:
-        //     // Allow HOME_D + W
-        //     if (other_keycode == KC_W || other_keycode == KC_SPC || other_keycode == SPC_NUM) { return true; }
+        // case BTM_SLSH:
+        //     if (other_keycode == KC_H || other_keycode == KC_J || other_keycode == KC_K || other_keycode == KC_L)
+        //         { return true; }
         //         break;
-        case BTM_SLSH:
-            if (other_keycode == KC_H || other_keycode == KC_J || other_keycode == KC_K || other_keycode == KC_L)
-                { return true; }
-                break;
         case MO(_NAV):  // Allow all
         case MO(_NUM):  // Allow all
             return true;
