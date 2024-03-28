@@ -22,8 +22,7 @@ enum layer_names {
 
 
 // Alias -- Mod-Tap
-#define SPC_NUM LT(_NUM, KC_SPC)
-#define NAV_BSPC LT(_NAV, KC_BSPC)
+#define ENT_NUM LT(_NUM, KC_ENT)
 #define MHEN_CTL CTL_T(KC_INT5)  // JP_MHEN
 
 // Alias -- One Shot Modifier
@@ -52,6 +51,7 @@ enum combos {
     LSCLN_COMBO,
     COMMDOT_COMBO,
     DOTSLSH_COMBO,
+    NUM_COMBO,
 };
 
 const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
@@ -67,6 +67,7 @@ const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
 const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM num_combo[] = {KC_N, KC_U, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
     [RT_COMBO] = COMBO(rt_combo, CW_TOGG),
@@ -81,6 +82,7 @@ combo_t key_combos[] = {
     [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
     [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
     [DOTSLSH_COMBO] = COMBO(dotslsh_combo, KC_RGUI),
+    [NUM_COMBO] = COMBO(num_combo, KC_NUM),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -89,14 +91,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_MINS,
         KC_ESC,     HOME_A,     KC_S,       KC_D,       KC_F,       KC_G,       KC_H,       KC_J,       KC_K,       KC_L,       HOME_SCLN,  KC_ENT,
         KC_LSFT,    KC_Z,       KC_X,       BTM_C,      BTM_V,      KC_B,       KC_N,       BTM_M,      BTM_COMM,   KC_DOT,     KC_SLSH,    KC_RSFT,
-        KC_LCTL,    XXXXXXX,    KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     KC_ENT,     MO(_NAV),   KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+        KC_LCTL,    XXXXXXX,    KC_LGUI,    KC_LALT,    KC_LCTL,    KC_SPC,     ENT_NUM,    MO(_NAV),   KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
     ),
     // navigation + number + function
 	[_NAV] = LAYOUT_ortho_5x12(
         KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-        _______,    XXXXXXX,    KC_KP_7,    KC_KP_8,    KC_KP_9,    XXXXXXX,    KC_WH_L,    KC_WH_D,    KC_WH_U,    KC_WH_R,    XXXXXXX,    XXXXXXX,
-        _______,    KC_KP_0,    KC_KP_4,    KC_KP_5,    KC_KP_6,    XXXXXXX,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    XXXXXXX,    _______,
-        _______,    XXXXXXX,    KC_KP_1,    KC_KP_2,    KC_KP_3,    XXXXXXX,    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     XXXXXXX,    XXXXXXX,
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_WH_L,    KC_WH_D,    KC_WH_U,    KC_WH_R,    XXXXXXX,    XXXXXXX,
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT,    XXXXXXX,    _______,
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,     XXXXXXX,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
+	),
+    // num
+	[_NUM] = LAYOUT_ortho_5x12(
+        XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
+        _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+        XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
 	),
     // symbol 1
@@ -168,6 +178,31 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
+// permissive hold per key settings
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
+// quick tap term per key settings
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+            return 0;
+        case HOME_A:
+        case HOME_SCLN:
+            return QUICK_TAP_TERM - 100;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+
 // Restrict oppisite hand holds by mod-tap
 bool achordion_chord(uint16_t tap_hold_keycode,
                     keyrecord_t* tap_hold_record,
@@ -180,7 +215,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
         //         { return true; }
         //         break;
         case MO(_NAV):  // Allow all
-        case MO(_NUM):  // Allow all
+        case ENT_NUM:  // Allow all
             return true;
     }
     switch (other_keycode) {
