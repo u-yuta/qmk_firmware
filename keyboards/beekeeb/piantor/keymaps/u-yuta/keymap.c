@@ -3,6 +3,16 @@
 
 #include QMK_KEYBOARD_H
 
+enum combos {
+    DF_COMBO,
+};
+
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+
+combo_t key_combos[] = {
+    [DF_COMBO] = COMBO(df_combo, KC_ESC),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      /*
       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
