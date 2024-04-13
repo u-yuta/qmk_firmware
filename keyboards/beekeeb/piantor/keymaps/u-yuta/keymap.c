@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_split_3x6_3(
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_MINS,
         KC_ESC,  HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,KC_ENT,
-        KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH,  KC_RSFT,
+        KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH,  JP_BSLS,
                                             KC_LALT, KC_LCTL, KC_SPC,  ENT_NUM, MO(_NAV),KC_LEFT
     ),
     // navigation
@@ -125,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // symbol 1
     [_SYM] = LAYOUT_split_3x6_3(
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, XXXXXXX, XXXXXXX,
-        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_LPRN, JP_RPRN, JP_YEN,  JP_COLN, _______,
+        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_LPRN, JP_RPRN, JP_TILD, JP_COLN, _______,
         _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   XXXXXXX, JP_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
     ),
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYM2] = LAYOUT_split_3x6_3(
         _______, JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         _______, JP_UNDS, JP_EQL,  JP_LBRC, JP_RBRC, JP_DQUO,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-        _______, _______, JP_TILD, JP_LCBR, JP_RCBR, XXXXXXX,                   _______, OSM_RSFT,OSM_RCTL,OSM_RALT,OSM_RGUI,XXXXXXX,
+        _______, _______, _______, JP_LCBR, JP_RCBR, XXXXXXX,                   _______, OSM_RSFT,OSM_RCTL,OSM_RALT,OSM_RGUI,XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
     )
 };
