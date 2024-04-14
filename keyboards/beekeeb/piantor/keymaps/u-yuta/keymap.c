@@ -138,6 +138,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+// permissive hold per key settings
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+        case BTM_V:
+        case BTM_M:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
+// quick tap term per key settings
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+            return 0;
+        case HOME_A:
+        case HOME_SCLN:
+            return QUICK_TAP_TERM - 100;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+
 // Restrict oppisite hand holds by mod-tap
 bool achordion_chord(uint16_t tap_hold_keycode,
                     keyrecord_t* tap_hold_record,
