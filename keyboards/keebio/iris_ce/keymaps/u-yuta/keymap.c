@@ -7,7 +7,53 @@
 enum custom_layers {
      _QWERTY,
      _LOWER,
-     _RAISE
+     _RAISE,
+     _NAV,
+     _NUM,
+     _SYM,
+     _SYM2
+};
+
+// Alias -- home row
+#define HOME_A LT(_SYM, KC_A)
+#define HOME_SCLN LT(_SYM2, KC_SCLN)
+
+// Alias -- bottom row
+#define BTM_C CTL_T(KC_C)
+#define BTM_V SFT_T(KC_V)
+#define BTM_M SFT_T(KC_M)
+#define BTM_COMM CTL_T(KC_COMM)
+
+// Alias -- Mod-Tap
+#define ENT_NUM LT(_NUM, KC_ENT)
+
+// Combos
+enum combos {
+    TG_COMBO,
+    RF_COMBO,
+    ZX_COMBO,
+    XC_COMBO,
+    UJ_COMBO,
+    COMMDOT_COMBO,
+    DOTSLSH_COMBO,
+};
+
+const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
+const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
+const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
+const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
+const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+
+combo_t key_combos[] = {
+    [TG_COMBO] = COMBO(tg_combo, CW_TOGG),
+    [RF_COMBO] = COMBO(rf_combo, JP_MHEN),
+    [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
+    [XC_COMBO] = COMBO(xc_combo, KC_LALT),
+    [UJ_COMBO] = COMBO(uj_combo, JP_HENK),
+    [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
+    [DOTSLSH_COMBO] = COMBO(dotslsh_combo, KC_RGUI),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
