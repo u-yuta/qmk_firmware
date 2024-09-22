@@ -38,16 +38,15 @@ enum layer_names {
 #define OSM_RGUI OSM(MOD_RGUI)
 
 enum combos {
-    RT_COMBO,
-    SD_COMBO,
-    DF_COMBO,
+    TG_COMBO,
+    RF_COMBO,
     ZX_COMBO,
     XC_COMBO,
     CV_COMBO,
     ZC_COMBO,
     ZV_COMBO,
     FG_COMBO,
-    HJ_COMBO,
+    UJ_COMBO,
     JK_COMBO,
     KL_COMBO,
     LSCLN_COMBO,
@@ -56,14 +55,13 @@ enum combos {
     NUM_COMBO,
 };
 
-const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
+const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
 const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
 const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
-const uint16_t PROGMEM hj_combo[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
@@ -72,13 +70,12 @@ const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM num_combo[] = {KC_N, KC_U, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
-    [RT_COMBO] = COMBO(rt_combo, CW_TOGG),
-    [SD_COMBO] = COMBO(sd_combo, KC_TAB),
-    [DF_COMBO] = COMBO(df_combo, KC_ESC),
+    [TG_COMBO] = COMBO(tg_combo, CW_TOGG),
+    [RF_COMBO] = COMBO(rf_combo, JP_MHEN),
     [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
     [XC_COMBO] = COMBO(xc_combo, KC_LALT),
     [FG_COMBO] = COMBO(fg_combo, JP_MHEN),
-    [HJ_COMBO] = COMBO(hj_combo, JP_HENK),
+    [UJ_COMBO] = COMBO(uj_combo, JP_HENK),
     [JK_COMBO] = COMBO(jk_combo, KC_BSPC),
     [KL_COMBO] = COMBO(kl_combo, KC_DEL),
     [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
@@ -88,25 +85,11 @@ combo_t key_combos[] = {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-     /*
-      * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-      * │Tab│ Q │ W │ E │ R │ T │       │ Y │ U │ I │ O │ P │Bsp│
-      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-      * │Ctl│ A │ S │ D │ F │ G │       │ H │ J │ K │ L │ ; │ ' │
-      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-      * │Sft│ Z │ X │ C │ V │ B │       │ N │ M │ , │ . │ / │Sft│
-      * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-      *               ┌───┐                   ┌───┐
-      *               │GUI├───┐           ┌───┤Alt│
-      *               └───┤Bsp├───┐   ┌───┤Ent├───┘
-      *                   └───┤   │   │   ├───┘
-      *                       └───┘   └───┘
-      */
     [_DEFAULT] = LAYOUT_split_3x6_3(
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_MINS,
         KC_ESC,  HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
         KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH,  JP_BSLS,
-                                            KC_LALT, KC_LCTL, KC_SPC,  ENT_NUM, MO(_NAV),KC_LEFT
+                                            KC_BSPC, KC_LCTL, KC_SPC,  ENT_NUM, MO(_NAV),KC_DEL
     ),
     // navigation
     [_NAV] = LAYOUT_split_3x6_3(
