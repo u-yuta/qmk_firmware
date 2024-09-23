@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC,  HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,    QK_BOOT,          QK_BOOT, KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
+     KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,    KC_WH_D,          KC_WH_U, KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_BSPC, KC_LCTL, KC_SPC,                    ENT_NUM, MO(_NAV),KC_DEL
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -168,3 +168,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
+
+// permissive hold per key settings
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+        case BTM_V:
+        case BTM_M:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
+// quick tap term per key settings
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENT_NUM:
+            return 0;
+        case HOME_A:
+        case HOME_SCLN:
+            return QUICK_TAP_TERM - 100;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
