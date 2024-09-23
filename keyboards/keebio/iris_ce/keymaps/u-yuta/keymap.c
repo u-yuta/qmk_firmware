@@ -11,7 +11,8 @@ enum custom_layers {
      _NAV,
      _NUM,
      _SYM,
-     _SYM2
+     _SYM2,
+     _NUMPAD
 };
 
 // Alias -- home row
@@ -26,6 +27,7 @@ enum custom_layers {
 
 // Alias -- Mod-Tap
 #define ENT_NUM LT(_NUM, KC_ENT)
+#define ESC_NUMP LT(_NUMPAD, KC_ESC)
 
 // Alias -- One Shot Modifier
 #define OSM_LSFT OSM(MOD_LSFT)
@@ -74,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC,  HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
+     ESC_NUMP,HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,    KC_WH_D,          KC_WH_U, KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -138,6 +140,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
+  // NUMPAD
+  [_NUMPAD] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     _______, XXXXXXX, KC_F10,  KC_F11,  KC_F12,  XXXXXXX,                            KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, XXXXXXX, KC_F7,   KC_F8,   KC_F9,   XXXXXXX,                            KC_PSLS, KC_P7,   KC_P8,   KC_P9,   KC_PMNS, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, XXXXXXX, KC_F4,   KC_F5,   KC_F6,   XXXXXXX,                            KC_PAST, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   XXXXXXX, QK_BOOT,          QK_BOOT, KC_COMM, KC_P1,   KC_P2,   KC_P3,   KC_PDOT, XXXXXXX,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    _______, _______, _______,                   _______, _______, KC_P0
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
   // not used
   [_LOWER] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -173,6 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ENT_NUM:
+        case ESC_NUMP:
         case BTM_V:
         case BTM_M:
             // Immediately select the hold action when another key is tapped.
@@ -187,6 +205,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ENT_NUM:
+        case ESC_NUMP:
             return 0;
         case HOME_A:
         case HOME_SCLN:
