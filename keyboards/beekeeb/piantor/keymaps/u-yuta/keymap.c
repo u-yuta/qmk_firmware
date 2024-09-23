@@ -107,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     // symbol 1
     [_SYM] = LAYOUT_split_3x6_3(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, XXXXXXX, XXXXXXX,
-        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_LPRN, JP_RPRN, JP_TILD, JP_PLUS, JP_ASTR,
-        _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   XXXXXXX, JP_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, JP_GRV,  XXXXXXX,
+        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_TILD, JP_LPRN, JP_RPRN, JP_PLUS, JP_ASTR,
+        _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   XXXXXXX, XXXXXXX, JP_LABK, JP_RABK, XXXXXXX, XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
     ),
     // symbol 2
