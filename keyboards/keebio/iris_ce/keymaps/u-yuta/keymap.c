@@ -114,11 +114,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, XXXXXXX, XXXXXXX,
+     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, JP_GRV,  XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            JP_QUOT, JP_LPRN, JP_RPRN, JP_TILD, JP_PLUS, JP_ASTR,
+     _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            JP_QUOT, JP_TILD, JP_LPRN, JP_RPRN, JP_PLUS, JP_ASTR,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, JP_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, JP_LABK, JP_RABK, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
