@@ -18,10 +18,14 @@ enum layer_names {
 #define HOME_A LT(_SYM, KC_A)
 #define HOME_SCLN LT(_SYM2, KC_SCLN)
 // Alias -- bottom row
+#define W_T_Z WIN_T(KC_Z)
+#define A_T_X ALT_T(KC_X)
 #define BTM_C CTL_T(KC_C)
 #define BTM_V SFT_T(KC_V)
 #define BTM_M SFT_T(KC_M)
 #define BTM_COMM CTL_T(KC_COMM)
+#define A_T_DOT ALT_T(KC_DOT)
+#define W_T_SLSH WIN_T(KC_SLSH)
 
 // Alias -- Mod-Tap
 #define ENT_NUM LT(_NUM, KC_ENT)
@@ -59,15 +63,15 @@ enum combos {
 const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
 const uint16_t PROGMEM ed_combo[] = {KC_E, KC_D, COMBO_END};
 const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
-const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
+const uint16_t PROGMEM zx_combo[] = {W_T_Z, A_T_X, COMBO_END};
+const uint16_t PROGMEM xc_combo[] = {A_T_X, BTM_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
 const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
 const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
 const uint16_t PROGMEM ik_combo[] = {KC_I, KC_K, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
-const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, A_T_DOT, COMBO_END};
+const uint16_t PROGMEM dotslsh_combo[] = {A_T_DOT, W_T_SLSH, COMBO_END};
 const uint16_t PROGMEM num_combo[] = {KC_N, KC_U, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
@@ -89,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_split_3x6_3(
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_MINS,
         ESC_NUMP,HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
-        KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH,  JP_BSLS,
+        KC_LSFT, W_T_Z,   A_T_X,   BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,A_T_DOT, W_T_SLSH, JP_BSLS,
                                             KC_LALT, KC_LCTL, KC_SPC,  ENT_NUM, MO(_NAV),KC_DEL
     ),
     // navigation
@@ -103,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUM] = LAYOUT_split_3x6_3(
         KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F4,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
         _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
-        XXXXXXX, KC_Z,    KC_X,    BTM_C,   BTM_V,   XXXXXXX,                   XXXXXXX, BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
+        XXXXXXX, W_T_Z,   A_T_X,   BTM_C,   BTM_V,   XXXXXXX,                   XXXXXXX, BTM_M,   BTM_COMM,A_T_DOT, W_T_SLSH, JP_BSLS,
                                             _______, _______, _______, _______, _______, _______
     ),
     // symbol 1
