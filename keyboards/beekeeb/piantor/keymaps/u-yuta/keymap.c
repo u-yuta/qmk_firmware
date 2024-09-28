@@ -157,13 +157,11 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ENT_NUM:
-        case BSPC_NAV:
-        case DEL_FUNC:
         case ESC_NUMP:
             return 0;
         case HOME_A:
         case HOME_SCLN:
-            return QUICK_TAP_TERM - 100;
+            return QUICK_TAP_TERM - 20;
         default:
             return QUICK_TAP_TERM;
     }
