@@ -47,14 +47,14 @@ enum layer_names {
 enum combos {
     TG_COMBO,
     ED_COMBO,
-    RF_COMBO,
+    DF_COMBO,
     ZX_COMBO,
     XC_COMBO,
     CV_COMBO,
     ZC_COMBO,
     ZV_COMBO,
     FG_COMBO,
-    UJ_COMBO,
+    JK_COMBO,
     IK_COMBO,
     LSCLN_COMBO,
     COMMDOT_COMBO,
@@ -64,12 +64,12 @@ enum combos {
 
 const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
 const uint16_t PROGMEM ed_combo[] = {KC_E, KC_D, COMBO_END};
-const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM zx_combo[] = {W_T_Z, A_T_X, COMBO_END};
 const uint16_t PROGMEM xc_combo[] = {A_T_X, C_T_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {C_T_C, S_T_C, COMBO_END};
 const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
-const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM ik_combo[] = {KC_I, KC_K, COMBO_END};
 const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
 const uint16_t PROGMEM commdot_combo[] = {C_T_COMM, A_T_DOT, COMBO_END};
@@ -79,11 +79,11 @@ const uint16_t PROGMEM num_combo[] = {KC_N, KC_U, KC_M, COMBO_END};
 combo_t key_combos[] = {
     [TG_COMBO] = COMBO(tg_combo, CW_TOGG),
     [ED_COMBO] = COMBO(ed_combo, KC_BSPC),
-    [RF_COMBO] = COMBO(rf_combo, JP_MHEN),
+    [DF_COMBO] = COMBO(df_combo, JP_MHEN),
     [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
     [XC_COMBO] = COMBO(xc_combo, KC_LALT),
     [FG_COMBO] = COMBO(fg_combo, JP_MHEN),
-    [UJ_COMBO] = COMBO(uj_combo, JP_HENK),
+    [JK_COMBO] = COMBO(jk_combo, JP_HENK),
     [IK_COMBO] = COMBO(ik_combo, KC_DEL),
     [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
     [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
