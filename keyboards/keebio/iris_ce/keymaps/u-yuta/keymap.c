@@ -21,10 +21,14 @@ enum custom_layers {
 #define HOME_SCLN LT(_SYM2, KC_SCLN)
 
 // Alias -- bottom row
-#define BTM_C CTL_T(KC_C)
-#define BTM_V SFT_T(KC_V)
-#define BTM_M SFT_T(KC_M)
-#define BTM_COMM CTL_T(KC_COMM)
+#define W_T_Z WIN_T(KC_Z)
+#define A_T_X ALT_T(KC_X)
+#define C_T_C CTL_T(KC_C)
+#define S_T_V SFT_T(KC_V)
+#define S_T_M SFT_T(KC_M)
+#define C_T_COMM CTL_T(KC_COMM)
+#define A_T_DOT ALT_T(KC_DOT)
+#define W_T_SLSH WIN_T(KC_SLSH)
 
 // Alias -- Mod-Tap
 #define ENT_NUM LT(_NUM, KC_ENT)
@@ -45,31 +49,20 @@ enum custom_layers {
 // Combos
 enum combos {
     TG_COMBO,
-    RF_COMBO,
-    ZX_COMBO,
-    XC_COMBO,
-    UJ_COMBO,
-    COMMDOT_COMBO,
-    DOTSLSH_COMBO,
+    DF_COMBO,
+    JK_COMBO,
 };
 
 const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
-const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
-const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
-const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
-const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
     [TG_COMBO] = COMBO(tg_combo, CW_TOGG),
-    [RF_COMBO] = COMBO(rf_combo, JP_MHEN),
-    [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
-    [XC_COMBO] = COMBO(xc_combo, KC_LALT),
-    [UJ_COMBO] = COMBO(uj_combo, JP_HENK),
-    [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
-    [DOTSLSH_COMBO] = COMBO(dotslsh_combo, KC_RGUI),
+    [DF_COMBO] = COMBO(df_combo, JP_MHEN),
+    [JK_COMBO] = COMBO(jk_combo, JP_HENK),
 };
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -81,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      ESC_NUMP,HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,    KC_WH_D,          KC_WH_U, KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
+     KC_LSFT, W_T_Z,   A_T_X,   C_T_C,   S_T_V,   KC_B,    KC_WH_D,          KC_WH_U, KC_N,    S_T_M,   C_T_COMM,A_T_DOT, W_T_SLSH,JP_BSLS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LALT, KC_LCTL, KC_SPC,                    ENT_NUM, BSPC_NAV,DEL_FUNC
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -195,8 +188,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         case BSPC_NAV:
         case DEL_FUNC:
         case ESC_NUMP:
-        case BTM_V:
-        case BTM_M:
+        case S_T_V:
+        case S_T_M:
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
