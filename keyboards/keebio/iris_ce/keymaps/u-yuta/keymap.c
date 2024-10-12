@@ -3,6 +3,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_extras/keymap_japanese.h"
+#include "features/achordion.h"
 
 enum custom_layers {
      _QWERTY,
@@ -12,7 +13,8 @@ enum custom_layers {
      _NUM,
      _SYM,
      _SYM2,
-     _NUMPAD
+     _NUMPAD,
+    _FUNC
 };
 
 // Alias -- home row
@@ -28,6 +30,8 @@ enum custom_layers {
 // Alias -- Mod-Tap
 #define ENT_NUM LT(_NUM, KC_ENT)
 #define ESC_NUMP LT(_NUMPAD, KC_ESC)
+#define BSPC_NAV LT(_NAV, KC_BSPC)
+#define DEL_FUNC LT(_FUNC, KC_DEL)
 
 // Alias -- One Shot Modifier
 #define OSM_LSFT OSM(MOD_LSFT)
@@ -213,4 +217,43 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
         default:
             return QUICK_TAP_TERM;
     }
+}
+
+// Restrict oppisite hand holds by mod-tap
+bool achordion_chord(uint16_t tap_hold_keycode,
+                    keyrecord_t* tap_hold_record,
+                    uint16_t other_keycode,
+                    keyrecord_t* other_record) {
+
+    switch (tap_hold_keycode) {
+        // case BTM_SLSH:
+        //     if (other_keycode == KC_H || other_keycode == KC_J || other_keycode == KC_K || other_keycode == KC_L)
+        //         { return true; }
+        //         break;
+        case ENT_NUM:   // Allow all
+        case BSPC_NAV:   // Allow all
+        case DEL_FUNC:   // Allow all
+        case ESC_NUMP:  // Allow all
+            return true;
+    }
+    switch (other_keycode) {
+        case KC_SPC:
+        case KC_ENT:
+            return true;
+    }
+    // Allow same-hand holds when the other key is in the rows below the
+    // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+    // if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
+
+    // Otherwise, follow the opposite hands rule.
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (!process_achordion(keycode, record)) { return false; }
+
+    return true;
+}
+
+void matrix_scan_user(void) {
+    achordion_task();
 }
