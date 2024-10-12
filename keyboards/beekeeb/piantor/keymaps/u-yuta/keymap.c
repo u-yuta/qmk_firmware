@@ -11,20 +11,27 @@ enum layer_names {
     _NUM,
     _SYM,
     _SYM2,
-    _MOUSE
+    _FUNC
 };
 
 // Alias -- home row
 #define HOME_A LT(_SYM, KC_A)
 #define HOME_SCLN LT(_SYM2, KC_SCLN)
 // Alias -- bottom row
-#define BTM_C CTL_T(KC_C)
-#define BTM_V SFT_T(KC_V)
-#define BTM_M SFT_T(KC_M)
-#define BTM_COMM CTL_T(KC_COMM)
+#define W_T_Z WIN_T(KC_Z)
+#define A_T_X ALT_T(KC_X)
+#define C_T_C CTL_T(KC_C)
+#define S_T_C SFT_T(KC_V)
+#define S_T_M SFT_T(KC_M)
+#define C_T_COMM CTL_T(KC_COMM)
+#define A_T_DOT ALT_T(KC_DOT)
+#define W_T_SLSH WIN_T(KC_SLSH)
 
 // Alias -- Mod-Tap
 #define ENT_NUM LT(_NUM, KC_ENT)
+#define ESC_NUMP LT(_NUM, KC_ESC)
+#define BSPC_NAV LT(_NAV, KC_BSPC)
+#define DEL_FUNC LT(_FUNC, KC_DEL)
 #define MHEN_CTL CTL_T(KC_INT5)  // JP_MHEN
 
 // Alias -- One Shot Modifier
@@ -39,77 +46,46 @@ enum layer_names {
 
 enum combos {
     TG_COMBO,
-    RF_COMBO,
-    ZX_COMBO,
-    XC_COMBO,
-    CV_COMBO,
-    ZC_COMBO,
-    ZV_COMBO,
-    FG_COMBO,
-    UJ_COMBO,
+    DF_COMBO,
     JK_COMBO,
-    KL_COMBO,
-    LSCLN_COMBO,
-    COMMDOT_COMBO,
-    DOTSLSH_COMBO,
-    NUM_COMBO,
 };
 
 const uint16_t PROGMEM tg_combo[] = {KC_T, KC_G, COMBO_END};
-const uint16_t PROGMEM rf_combo[] = {KC_R, KC_F, COMBO_END};
-const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM xc_combo[] = {KC_X, BTM_C, COMBO_END};
-const uint16_t PROGMEM cv_combo[] = {BTM_C, BTM_V, COMBO_END};
-const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
-const uint16_t PROGMEM uj_combo[] = {KC_U, KC_J, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM lscln_combo[] = {KC_L, HOME_SCLN, COMBO_END};
-const uint16_t PROGMEM commdot_combo[] = {BTM_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM dotslsh_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM num_combo[] = {KC_N, KC_U, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
     [TG_COMBO] = COMBO(tg_combo, CW_TOGG),
-    [RF_COMBO] = COMBO(rf_combo, JP_MHEN),
-    [ZX_COMBO] = COMBO(zx_combo, KC_LGUI),
-    [XC_COMBO] = COMBO(xc_combo, KC_LALT),
-    [FG_COMBO] = COMBO(fg_combo, JP_MHEN),
-    [UJ_COMBO] = COMBO(uj_combo, JP_HENK),
-    [JK_COMBO] = COMBO(jk_combo, KC_BSPC),
-    [KL_COMBO] = COMBO(kl_combo, KC_DEL),
-    [LSCLN_COMBO] = COMBO(lscln_combo, JP_COLN),
-    [COMMDOT_COMBO] = COMBO(commdot_combo, KC_RALT),
-    [DOTSLSH_COMBO] = COMBO(dotslsh_combo, KC_RGUI),
-    [NUM_COMBO] = COMBO(num_combo, KC_NUM),
+    [DF_COMBO] = COMBO(df_combo, JP_MHEN),
+    [JK_COMBO] = COMBO(jk_combo, JP_HENK),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_split_3x6_3(
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_MINS,
-        KC_ESC,  HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
-        KC_LSFT, KC_Z,    KC_X,    BTM_C,   BTM_V,   KC_B,                      KC_N,    BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH,  JP_BSLS,
-                                            KC_BSPC, KC_LCTL, KC_SPC,  ENT_NUM, MO(_NAV),KC_DEL
+        ESC_NUMP,HOME_A,  KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    HOME_SCLN,JP_COLN,
+        KC_LSFT, W_T_Z,   A_T_X,   C_T_C,   S_T_C,   KC_B,                      KC_N,    S_T_M,   C_T_COMM,A_T_DOT, W_T_SLSH, JP_BSLS,
+                                            KC_LALT, KC_LCTL, KC_SPC,  ENT_NUM, BSPC_NAV,DEL_FUNC
     ),
     // navigation
     [_NAV] = LAYOUT_split_3x6_3(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX,
+        _______, KC_HOME, KC_UP,   KC_END,  KC_PGUP, XXXXXXX,                   KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX, XXXXXXX,
+        _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
+        _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
     ),
     // num
     [_NUM] = LAYOUT_split_3x6_3(
-        KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F4,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,
-        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
-        XXXXXXX, KC_Z,    KC_X,    BTM_C,   BTM_V,   XXXXXXX,                   XXXXXXX, BTM_M,   BTM_COMM,KC_DOT,  KC_SLSH, JP_BSLS,
+        _______, KC_PSLS, KC_P7,   KC_P8,   KC_P9,   KC_PMNS,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,
+        _______, KC_PAST, KC_P4,   KC_P5,   KC_P6,   KC_PPLS,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,
+        _______, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PDOT,                   XXXXXXX, _______, _______, _______, _______, _______,
                                             _______, _______, _______, _______, _______, _______
     ),
     // symbol 1
     [_SYM] = LAYOUT_split_3x6_3(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, XXXXXXX, XXXXXXX,
-        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_LPRN, JP_RPRN, JP_TILD, JP_PLUS, JP_ASTR,
-        _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   XXXXXXX, JP_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_CIRC, JP_AMPR, JP_ASTR, JP_PIPE, JP_GRV,  XXXXXXX,
+        _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_QUOT, JP_TILD, JP_LPRN, JP_RPRN, JP_PLUS, JP_ASTR,
+        _______, OSM_RGUI,OSM_LALT,OSM_LCTL,OSM_LSFT,XXXXXXX,                   XXXXXXX, XXXXXXX, JP_LABK, JP_RABK, XXXXXXX, XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
     ),
     // symbol 2
@@ -118,6 +94,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, JP_UNDS, JP_EQL,  JP_LBRC, JP_RBRC, JP_DQUO,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
         _______, _______, _______, JP_LCBR, JP_RCBR, XXXXXXX,                   _______, OSM_RSFT,OSM_RCTL,OSM_RALT,OSM_RGUI,XXXXXXX,
                                             _______, _______, _______, _______, _______, _______
+    ),
+
+    // function key
+    [_FUNC] = LAYOUT_split_3x6_3(
+        _______, KC_F12,  KC_F7,   KC_F8,   KC_F9,   XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, KC_F11,  KC_F4,   KC_F5,   KC_F6,   XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, KC_F10,  KC_F1,   KC_F2,   KC_F3,   XXXXXXX,                   XXXXXXX, OSM_RSFT,OSM_RCTL,OSM_RALT,OSM_RGUI,XXXXXXX,
+                                            _______, _______, _______, _______, _______, _______
     )
 };
 
@@ -125,8 +109,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ENT_NUM:
-        case BTM_V:
-        case BTM_M:
+        case BSPC_NAV:
+        case DEL_FUNC:
+        case ESC_NUMP:
+        case S_T_C:
+        case S_T_M:
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
@@ -139,10 +126,11 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ENT_NUM:
+        case ESC_NUMP:
             return 0;
         case HOME_A:
         case HOME_SCLN:
-            return QUICK_TAP_TERM - 100;
+            return QUICK_TAP_TERM - 20;
         default:
             return QUICK_TAP_TERM;
     }
@@ -159,8 +147,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
         //     if (other_keycode == KC_H || other_keycode == KC_J || other_keycode == KC_K || other_keycode == KC_L)
         //         { return true; }
         //         break;
-        case MO(_NAV):  // Allow all
-        case ENT_NUM:  // Allow all
+        case ENT_NUM:   // Allow all
+        case BSPC_NAV:   // Allow all
+        case DEL_FUNC:   // Allow all
+        case ESC_NUMP:  // Allow all
             return true;
     }
     switch (other_keycode) {

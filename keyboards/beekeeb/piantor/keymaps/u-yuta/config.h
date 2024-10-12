@@ -10,6 +10,7 @@
 #define TAPPING_TERM_PER_KEY
 #define COMBO_TERM 32
 #define PERMISSIVE_HOLD_PER_KEY
+#define QUICK_TAP_TERM 120
 #define QUICK_TAP_TERM_PER_KEY
 
 // Delay between pressing a wheel key and wheel movement, by default 80
